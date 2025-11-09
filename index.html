@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Patrouille de Nuit - Prototype</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="orientation-lock" class="hidden">
+      <div class="orientation-message">
+        <h1>Tourne ton téléphone</h1>
+        <p>Ce jeu se joue uniquement en mode paysage.</p>
+      </div>
+    </div>
+
+    <div id="main-menu" class="overlay visible">
+      <div class="panel">
+        <h1>Patrouille de Nuit</h1>
+        <button class="primary" data-action="play">Jouer</button>
+        <button data-action="levels">Niveaux</button>
+        <button data-action="stats">Statistiques</button>
+        <button data-action="options">Options</button>
+      </div>
+    </div>
+
+    <div id="level-select" class="overlay hidden">
+      <div class="panel scrollable">
+        <h2>Sélection du Niveau</h2>
+        <div id="levels"></div>
+        <button class="secondary" data-action="back-menu">Retour</button>
+      </div>
+    </div>
+
+    <div id="stats" class="overlay hidden">
+      <div class="panel">
+        <h2>Statistiques</h2>
+        <div id="stats-content"></div>
+        <button class="secondary" data-action="back-menu">Retour</button>
+      </div>
+    </div>
+
+    <div id="options" class="overlay hidden">
+      <div class="panel scrollable">
+        <h2>Options</h2>
+        <label class="toggle">
+          <span>Musique</span>
+          <input type="checkbox" id="music-toggle" checked />
+        </label>
+        <label class="range">
+          <span>Taille des boutons</span>
+          <input type="range" id="button-size" min="0.8" max="1.4" step="0.05" value="1" />
+        </label>
+        <label class="range">
+          <span>Sensibilité joystick</span>
+          <input type="range" id="joystick-sensitivity" min="0.5" max="1.5" step="0.05" value="1" />
+        </label>
+        <label class="toggle">
+          <span>Mode gaucher</span>
+          <input type="checkbox" id="lefty-mode" />
+        </label>
+        <label class="toggle">
+          <span>Contrôles</span>
+          <select id="control-scheme">
+            <option value="arrows">Flèches</option>
+            <option value="joystick">Joystick</option>
+          </select>
+        </label>
+        <div class="options-actions">
+          <button data-action="restart-level">Relancer le niveau</button>
+          <button data-action="quit-level">Quitter vers le menu</button>
+        </div>
+        <button class="secondary" data-action="close-options">Fermer</button>
+      </div>
+    </div>
+
+    <div id="hud" class="hidden">
+      <div class="hud-bar">
+        <span id="hud-score">Score : 0</span>
+        <span id="hud-lives">❤️ ×3</span>
+        <span id="hud-objectives">Civils : 0/0</span>
+        <button id="hud-options">⚙️</button>
+      </div>
+    </div>
+
+    <canvas id="game" width="960" height="540"></canvas>
+
+    <div id="controls" class="hidden">
+      <div class="control-left">
+        <div id="move-left" class="control-button">◀️</div>
+        <div id="move-right" class="control-button">▶️</div>
+        <div id="joystick" class="joystick hidden">
+          <div id="joystick-handle"></div>
+        </div>
+      </div>
+      <div class="control-right">
+        <div id="jump" class="control-button">⤴️</div>
+        <div id="defend" class="control-button">🛡️</div>
+        <div id="interact" class="control-button">🤝</div>
+      </div>
+    </div>
+
+    <div id="message" class="overlay hidden">
+      <div class="panel">
+        <h2 id="message-title"></h2>
+        <p id="message-body"></p>
+        <div class="countdown hidden" id="victory-countdown">
+          Prochain niveau dans <span id="countdown-value">6</span>s…
+        </div>
+        <div class="message-actions">
+          <button data-action="retry">Recommencer</button>
+          <button data-action="return-menu">Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="game.js" type="module"></script>
+  </body>
+</html>
